@@ -31,4 +31,17 @@ describe('gameplay module', () => {
 
     });
 
+    describe('fighting', () => {
+        
+        it('rolled dice twice', () => {
+            let game = new gameplay();
+            let rollDiceFunction = game.rollDice;
+            game.rollDice = jest.fn();
+            game.fight();
+            expect(game.rollDice).toHaveBeenCalledTimes(2);
+            game.rollDice = rollDiceFunction;
+        });
+
+    });
+
 });
