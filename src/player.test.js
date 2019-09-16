@@ -26,11 +26,15 @@ describe('player class', () => {
             expect(newPlayer.level).toBe(5);
         });
 
-
     });
 
     describe('reduce player life', () => {
         
+        it('decreases life by the damage', () => {
+            let newPlayer = new player();
+            newPlayer.reduceLife(15);
+            expect(newPlayer.life).toBe(85);
+        });
         
 
     });

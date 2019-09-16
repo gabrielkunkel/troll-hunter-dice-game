@@ -6,12 +6,13 @@ export class player {
         this.level = 4;
     }
 
-    // increase level
     raiseLevel() {
         this.level +=1;
     }
 
-    // reduce life
+    reduceLife(damage) {
+        this.life = this.life - damage;
+    }
 
 
 }
