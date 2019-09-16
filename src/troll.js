@@ -5,6 +5,8 @@ export class troll {
         this.level = level;
     }
 
-    
+    loseLife(amount) {
+        this.life = this.life - amount;
+    }
 
 }
