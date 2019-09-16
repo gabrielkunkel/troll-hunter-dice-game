@@ -20,6 +20,11 @@ describe('player class', () => {
 
     describe('raise player level', () => {
         
+        it('increases player level by 1', () => {
+            let newPlayer = new player();
+            newPlayer.raiseLevel();
+            expect(newPlayer.level).toBe(5);
+        });
 
 
     });
