@@ -6,6 +6,9 @@ export class player {
         this.level = 4;
     }
 
-    // 
+    // increase level
+
+    // reduce life
+
 
 }
