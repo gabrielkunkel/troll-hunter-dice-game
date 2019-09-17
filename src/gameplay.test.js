@@ -37,7 +37,7 @@ describe('gameplay module', () => {
             let game = new gameplay();
             let rollDiceFunction = game.rollDice;
             game.rollDice = jest.fn();
-            game.fight();
+            game.fight(0);
             expect(game.rollDice).toHaveBeenCalledTimes(2);
             game.rollDice = rollDiceFunction;
         });

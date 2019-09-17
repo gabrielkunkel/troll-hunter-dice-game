@@ -2,26 +2,22 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { gameplay } from './gameplay';
+import { MonsterFrame } from './MonsterFrame';
 
 let game = new gameplay();
 
 function App() {
   return (
-    <div className="App" onClick={game.gameLoop}>
+    <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+
+      <div className="monster-row">
+        {game.trolls.map(monster => <MonsterFrame key={monster.id} monster={monster} game={game} />)}
+      </div>
+
+
     </div>
   );
 }
