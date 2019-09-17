@@ -2,12 +2,10 @@ import React from 'react';
 
 export const MonsterFrame = ({monster, fight}) => {
 
-    // <img src={require('/images/image-name.png')} />
-
     return (
         <div>
-            <img src={require(`/${monster.img}`)} onClick={() => fight(monster.id)} alt={monster.name} />
-            <i>{monster.name}</i>
+            <img src={require(`/${monster.img}`)} className="img-fluid monster-img" onClick={() => fight(monster.id)} alt={monster.name} />
+            <div className="caption center-block">{monster.name}</div>
         </div>
     )
 }

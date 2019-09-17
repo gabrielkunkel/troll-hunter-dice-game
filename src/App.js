@@ -106,8 +106,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
-      <div className="monster-row">
-        {monsters.map(monster => <MonsterFrame key={monster.id} monster={monster} fight={fight} />)}
+      <div className="container-fluid">
+        <div className="row">
+          {monsters.map(monster => <MonsterFrame className="col-md-4 px-1" key={monster.id} monster={monster} fight={fight} />)}
+        </div>
       </div>
 
 
