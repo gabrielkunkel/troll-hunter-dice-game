@@ -4,6 +4,9 @@ export class player {
     constructor () {
         this.life = 100;
         this.level = 4;
+
+        this.raiseLevel = this.raiseLevel.bind(this);
+        this.reduceLife = this.reduceLife.bind(this);
     }
 
     raiseLevel() {
