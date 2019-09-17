@@ -33,13 +33,19 @@ describe('gameplay module', () => {
 
     describe('fighting', () => {
         
-        it('rolled dice twice', () => {
+        it('rolls dice twice', () => {
             let game = new gameplay();
             let rollDiceFunction = game.rollDice;
             game.rollDice = jest.fn();
             game.fight();
             expect(game.rollDice).toHaveBeenCalledTimes(2);
             game.rollDice = rollDiceFunction;
+        });
+
+        it.skip('reduces troll life if troll loses', () => {
+            let game = new gameplay();
+            // mock rollDice function with predictable result
+            // see that the math in winning or losing is correct
         });
 
     });
