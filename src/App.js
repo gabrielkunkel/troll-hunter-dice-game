@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { gameplay } from './gameplay';
+
+let game = new gameplay();
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" onClick={game.gameLoop}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

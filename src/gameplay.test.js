@@ -44,4 +44,13 @@ describe('gameplay module', () => {
 
     });
 
+    describe('constructor', () => {
+
+        it('starts us off with a new player', () => {
+            let game = new gameplay;
+            expect(game.newPlayer.life).toEqual(100);
+        });
+    
+    });
+
 });
