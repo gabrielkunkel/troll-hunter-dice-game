@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { MonsterFrame } from './MonsterFrame';
@@ -11,8 +11,13 @@ function App() {
     level: 4,
     life: 100
   });
+  const [message, updateMessage] = useState('You are surrounded by a horde of monsters. You probably won\'t survive.');
 
-  generateInitialMonsters();
+  useEffect(() => {
+    generateInitialMonsters();
+    clearLogger();
+  });
+
 
   /**
    * @name generateInitialMonsters
@@ -53,7 +58,7 @@ function App() {
     if (monsterRoll > playerRoll) {
       let playerLostLife = Object.assign({}, player, { life: player.life - (monsterRoll - playerRoll) });
       updatePlayer(playerLostLife);
-      console.log("You lost that fight.");
+      initMessage(`${monsters[monsterId].name} strikes you. You lose ${monsterRoll - playerRoll} life.`);
     } else if (monsterRoll < playerRoll) {
       let MonstersUpdated = monsters.map(monster => {
         if (monster.id === monsterId) {
@@ -63,27 +68,26 @@ function App() {
         }
       })
       updateMonsters(MonstersUpdated);
-      console.log("You won that fight.");
+      initMessage(`You strike ${monsters[monsterId].name}. He loses ${playerRoll - monsterRoll} life.`);
     }
 
     // level up, win, or lose?
     if (monsters[monsterId].life < 1) {
-      console.log("You killed the monster. Level up!");
+      initMessage("You killed the monster. Level up!");
       let playerLeveledUp = Object.assign({}, player, { life: player.level + 1 });
       updatePlayer(playerLeveledUp);
       generateNewMonster(monsterId);
     }
 
     if (player.level === 8) {
-      console.log("You won.")
+      initMessage("You won. Yay.")
     }
 
     if (player.life < 1) {
-      console.log('You died. You\'re a loser')
+      initMessage('You died. You\'re a loser.')
     }
 
   }
-
 
   function generateNewMonster(monsterId) {
     let whichMonster = rollDice(monsterDatabase.length) - 1;
@@ -100,6 +104,17 @@ function App() {
     updateMonsters(MonstersUpdated);
   }
 
+  function clearLogger() {
+    setTimeout(() => {
+      updateMessage('');
+    }, 4000)
+  }
+
+  function initMessage(msg) {
+    updateMessage(msg);
+    clearLogger();
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -113,6 +128,10 @@ function App() {
         <div className="row justify-content-center">
             {monsters.map(monster => <MonsterFrame className="col-md-4 px-1" key={monster.id} monster={monster} fight={fight} />)}
         </div>
+        <div className="row justify-content-center mt-5">
+            <i>{message}</i>
+        </div>
+
       </div>
 
 
