@@ -6,12 +6,15 @@ import { monsterDatabase } from './monsterDatabase';
 
 function App() {
 
-  const [monsters, updateMonsters] = useState(generateInitialMonsters());
-  const [player, updatePlayer] = useState({
-    level: 4,
+  const originalPlayerState = {
+    level: 5,
     life: 100
-  });
+  }
+
+  const [monsters, updateMonsters] = useState(generateInitialMonsters());
+  const [player, updatePlayer] = useState(originalPlayerState);
   const [message, updateMessage] = useState('You are surrounded by a horde of monsters. You probably won\'t survive.');
+  const [showStartButton, updateShowStartButton] = useState(false);
 
   useEffect(() => {
     generateInitialMonsters();
@@ -81,14 +84,20 @@ function App() {
 
     if (player.level === 8) {
       initMessage("You won. Yay.")
+      updateShowStartButton(true);
     }
 
     if (player.life < 1) {
       initMessage('You died. You\'re a loser.')
+      updateShowStartButton(true);
     }
 
   }
 
+  /**
+   * @name generateNewMonster
+   * @param {number} monsterId 
+   */
   function generateNewMonster(monsterId) {
     let whichMonster = rollDice(monsterDatabase.length) - 1;
     let newMonster = Object.assign({}, monsterDatabase[whichMonster], { id: monsterId });
@@ -104,15 +113,31 @@ function App() {
     updateMonsters(MonstersUpdated);
   }
 
+  /**
+   * @name clearLogger
+   */
   function clearLogger() {
     setTimeout(() => {
       updateMessage('');
     }, 4000)
   }
 
+  /**
+   * @name initMessage
+   * @param {string} msg 
+   */
   function initMessage(msg) {
     updateMessage(msg);
     clearLogger();
+  }
+
+  /**
+   * @name startOver
+   */
+  function startOver() {
+    initMessage('You are surrounded by a horde of monsters. You probably won\'t survive.');
+    updatePlayer(originalPlayerState);
+    updateShowStartButton(false);
   }
 
   return (
@@ -129,14 +154,16 @@ function App() {
             {monsters.map(monster => <MonsterFrame className="col-md-4 px-1" key={monster.id} monster={monster} fight={fight} />)}
         </div>
         <div className="row justify-content-center mt-5">
-            <i>{message}</i>
+          <i>{message}</i>
+        </div>
+        <div className="row justify-content-center mt-3">
+          <i>{showStartButton ? <div><button type="button" className="btn btn-danger" onClick={startOver}>Start Over</button></div> : <div></div> }</i>
         </div>
 
       </div>
-
-
     </div>
   );
 }
+
 
 export default App;
