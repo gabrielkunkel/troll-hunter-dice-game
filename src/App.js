@@ -96,11 +96,16 @@ function App() {
 
   /**
    * @name generateNewMonster
+   * @description this function ensures the new monster will be different,
+   * by performing a re-roll if it is the same monster.
    * @param {number} monsterId 
    */
   function generateNewMonster(monsterId) {
-    let whichMonster = rollDice(monsterDatabase.length) - 1;
-    let newMonster = Object.assign({}, monsterDatabase[whichMonster], { id: monsterId });
+    let newMonster = { name: monsters[monsterId].name };
+    while(monsters[monsterId].name === newMonster.name) {
+      let whichMonster = rollDice(monsterDatabase.length) - 1;
+      newMonster = Object.assign({}, monsterDatabase[whichMonster], { id: monsterId });  
+    }
 
     let MonstersUpdated = monsters.map(monster => {
       if (monster.id === monsterId) {
