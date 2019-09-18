@@ -108,6 +108,9 @@ function App() {
 
       <div className="container-fluid">
         <div className="row justify-content-center">
+          <h1>MONSTER HORDE</h1>
+        </div>
+        <div className="row justify-content-center">
             {monsters.map(monster => <MonsterFrame className="col-md-4 px-1" key={monster.id} monster={monster} fight={fight} />)}
         </div>
       </div>
