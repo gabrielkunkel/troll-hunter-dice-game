@@ -15,7 +15,7 @@ function App() {
   const [player, updatePlayer] = useState(originalPlayerState);
   const [message, updateMessage] = useState('You are surrounded by a horde of monsters. You probably won\'t survive.');
   const [showStartButton, updateShowStartButton] = useState(false);
-  const [t, ut] = useState();
+  const [timerState, updateTimerState] = useState();
 
 
   /**
@@ -118,11 +118,11 @@ function App() {
    * @name clearLogger
    */
   function clearLogger() {
-    clearTimeout(t);
+    clearTimeout(timerState);
     let timer = setTimeout(() => {
       updateMessage('');
     }, 4000)
-    ut(timer);
+    updateTimerState(timer);
   }
 
   /**
