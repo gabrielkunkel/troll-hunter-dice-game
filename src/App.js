@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { MonsterFrame } from './MonsterFrame';
@@ -15,11 +15,7 @@ function App() {
   const [player, updatePlayer] = useState(originalPlayerState);
   const [message, updateMessage] = useState('You are surrounded by a horde of monsters. You probably won\'t survive.');
   const [showStartButton, updateShowStartButton] = useState(false);
-
-  useEffect(() => {
-    generateInitialMonsters();
-    clearLogger();
-  });
+  const [t, ut] = useState();
 
 
   /**
@@ -122,9 +118,11 @@ function App() {
    * @name clearLogger
    */
   function clearLogger() {
-    setTimeout(() => {
+    clearTimeout(t);
+    let timer = setTimeout(() => {
       updateMessage('');
     }, 4000)
+    ut(timer);
   }
 
   /**
