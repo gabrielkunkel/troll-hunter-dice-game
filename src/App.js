@@ -130,8 +130,8 @@ function App() {
    * @param {string} msg 
    */
   function initMessage(msg) {
-    updateMessage(msg);
     clearLogger();
+    updateMessage(msg);
   }
 
   /**
