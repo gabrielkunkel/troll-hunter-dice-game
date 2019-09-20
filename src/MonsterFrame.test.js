@@ -22,5 +22,4 @@ test('fighting onClick', () => {
     // Assert
     expect(fight).toHaveBeenCalledTimes(1);
     expect(fight).toHaveBeenCalledWith(myMonster.id);
-
 });
